@@ -24,10 +24,10 @@ def computerTurn(computerGuess, gameNumber, lowerNumber, higherNumber):
             
     elif computerGuess < gameNumber:
         lowerNumber = computerGuess + 1
-        print("AI guessed too low")
         print("AI guesses: ", computerGuess)
+        print("AI guessed too low")
+        
         computerGuess = computerNewGuess(computerGuess, higherNumber)
-        print("AI new guess is: ", computerGuess)
         
         return computerGuess, lowerNumber, higherNumber
 
@@ -44,8 +44,17 @@ def playerTurn(gameNumber):
     elif guessNo < gameNumber:
         print("You have gone too low")
     
-
+def gameLoop(gameNumber, computerGuess, lowerNumber, higherNumber, playerGuess):
     
+    while(1):
+        print("#####")
+        computerGuess, lowerNumber, higherNumber = computerTurn(computerGuess,gameNumber,lowerNumber, higherNumber)
+        playerGuess = playerTurn(gameNumber)
+        if(playerGuess == gameNumber):
+            print("Congratulations you have won")
+            break            
+        print("#####")
+        
 def game():
     
     gameNumber = createRandomNumber()
@@ -54,16 +63,7 @@ def game():
     lowerNumber = 0
     higherNumber = 100
     playerGuess = 0
-    count = 0
-    while(1):
-        print("!!!!!")
-        computerGuess, lowerNumber, higherNumber = computerTurn(computerGuess,gameNumber,lowerNumber, higherNumber)
-        playerGuess = playerTurn(gameNumber)
-        if(playerGuess == gameNumber):
-            print("Congratulations you have won")
-            break            
-        print("#####")
-        
-        count += 1
+
+    gameLoop(gameNumber, computerGuess, lowerNumber, higherNumber, playerGuess)
 
 game()
