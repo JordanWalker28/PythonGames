@@ -39,5 +39,5 @@ class Paddle(pygame.sprite.Sprite):
             if self.rect.x > 350:
                 self.rect.x = 350
         else:
-            if self.rect.x < 350:
-                self.rect.x = 350
+            if self.rect.x > 680:
+                self.rect.x = 680
