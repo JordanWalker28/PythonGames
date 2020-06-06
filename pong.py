@@ -44,30 +44,50 @@ while GameActive:
               GameActive = False
  
     keys = pygame.key.get_pressed()
+    
+    if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+        while True:
+            event = pygame.event.wait()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                break
+                
     if keys[pygame.K_w]:
         paddleA.moveUp(5)
     if keys[pygame.K_s]:
         paddleA.moveDown(5)
+    if keys[pygame.K_d]:
+        paddleA.moveRight(5, "paddleA")
+    if keys[pygame.K_a]:
+        paddleA.moveLeft(5, "paddleA")
+        
     if keys[pygame.K_UP]:
         paddleB.moveUp(5)
     if keys[pygame.K_DOWN]:
         paddleB.moveDown(5)
+    if keys[pygame.K_LEFT]:
+        paddleB.moveLeft(5, "paddleB")
+    if keys[pygame.K_RIGHT]:
+        paddleB.moveRight(5, "paddleB")
         
     all_sprites_list.update()
     
     if ball.rect.x>=690:
         scoreA+=1
         ball.velocity[0] = -ball.velocity[0]
+        ball.rect.x = 345
+        ball.rect.y = 195
     if ball.rect.x<=0:
         scoreB+=1
         ball.velocity[0] = -ball.velocity[0]
+        ball.rect.x = 345
+        ball.rect.y = 195
     if ball.rect.y>490:
         ball.velocity[1] = -ball.velocity[1]
     if ball.rect.y<0:
         ball.velocity[1] = -ball.velocity[1]
 
     if pygame.sprite.collide_mask(ball, paddleA) or pygame.sprite.collide_mask(ball, paddleB):
-      ball.bounce()
+        ball.bounce()
       
     screen.fill(BLACK)
 
@@ -84,6 +104,6 @@ while GameActive:
     
     pygame.display.flip()
      
-    clock.tick(60)
+    clock.tick(120)
 
 pygame.quit()
