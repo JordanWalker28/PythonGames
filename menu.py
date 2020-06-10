@@ -130,14 +130,6 @@ def title_screen(screen):
 
 
 def play_level(screen, player):
-    return_btn = UIElement(
-        center_position=(140, 570),
-        font_size=20,
-        bg_rgb=BLUE,
-        text_rgb=WHITE,
-        text="Return to main menu",
-        action=GameState.TITLE,
-    )
 
     nextlevel_btn = UIElement(
         center_position=(400, 400),
@@ -148,7 +140,7 @@ def play_level(screen, player):
         action=GameState.NEXT_LEVEL,
     )
 
-    buttons = RenderUpdates(return_btn, nextlevel_btn)
+    buttons = RenderUpdates(nextlevel_btn)
 
     return game_loop(screen, buttons)
 
