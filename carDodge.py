@@ -1,5 +1,5 @@
 import pygame, random
-#Let's import the Car Class
+
 from car import Car
 pygame.init()
  
@@ -22,8 +22,7 @@ SCREENHEIGHT=600
 size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Car Racing")
- 
-#This will be a list that will contain all the sprites we intend to use in our game.
+
 all_sprites_list = pygame.sprite.Group()
  
  
@@ -46,9 +45,7 @@ car3.rect.y = -300
 car4 = Car(BLUE, 60, 80, random.randint(50,100))
 car4.rect.x = 360
 car4.rect.y = -900
- 
- 
-# Add the car to the list of objects
+
 all_sprites_list.add(playerCar)
 all_sprites_list.add(car1)
 all_sprites_list.add(car2)
@@ -61,8 +58,6 @@ all_coming_cars.add(car2)
 all_coming_cars.add(car3)
 all_coming_cars.add(car4)
  
- 
-#Allowing the user to close the window...
 carryOn = True
 clock=pygame.time.Clock()
  
@@ -83,9 +78,7 @@ while carryOn:
             speed += 0.05
         if keys[pygame.K_DOWN]:
             speed -= 0.05
- 
- 
-        #Game Logic
+
         for car in all_coming_cars:
             car.moveForward(speed)
             if car.rect.y > SCREENHEIGHT:
@@ -96,30 +89,21 @@ while carryOn:
         car_collision_list = pygame.sprite.spritecollide(playerCar,all_coming_cars,False)
         for car in car_collision_list:
             print("Car crash!")
-            #End Of Game
             carryOn=False
             
         all_sprites_list.update()
  
-        #Drawing on Screen
         screen.fill(GREEN)
-        #Draw The Road
+
         pygame.draw.rect(screen, GREY, [40,0, 400,SCREENHEIGHT])
-        #Draw Line painting on the road
         pygame.draw.line(screen, WHITE, [140,0],[140,SCREENHEIGHT],5)
-        #Draw Line painting on the road
         pygame.draw.line(screen, WHITE, [240,0],[240,SCREENHEIGHT],5)
-        #Draw Line painting on the road
         pygame.draw.line(screen, WHITE, [340,0],[340,SCREENHEIGHT],5)
  
- 
-        #Now let's draw all the sprites in one go. (For now we only have 1 sprite!)
         all_sprites_list.draw(screen)
  
-        #Refresh Screen
         pygame.display.flip()
  
-        #Number of frames per secong e.g. 60
         clock.tick(60)
  
 pygame.quit()
